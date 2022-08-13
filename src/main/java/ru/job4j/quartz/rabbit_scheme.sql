@@ -1,4 +1,4 @@
 create table rabbit (
     id serial primary key,
-	created_date DATE
+	created_date timestamp
 );

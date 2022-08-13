@@ -5,6 +5,7 @@ import org.quartz.impl.StdSchedulerFactory;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 import static org.quartz.JobBuilder.*;
@@ -13,10 +14,15 @@ import static org.quartz.SimpleScheduleBuilder.*;
 
 public class AlertRabbit {
 
-    private static Properties config;
+    private static Properties config = new Properties();
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
+        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
+            config.load(in);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Class.forName(config.getProperty("jdbc.driver_class"));
         try (Connection cn = DriverManager.getConnection(
                 config.getProperty("jdbc.url"),
@@ -49,15 +55,7 @@ public class AlertRabbit {
     }
 
     private static int timeLoad() {
-        int time = 0;
-        Properties config = new Properties();
-        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
-            config.load(in);
-            time = Integer.parseInt(config.getProperty("rabbit.interval"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return time;
+        return Integer.parseInt(config.getProperty("rabbit.interval"));
     }
 
     public static class Rabbit implements Job {
@@ -73,13 +71,8 @@ public class AlertRabbit {
             try (PreparedStatement statement =
                          cn.prepareStatement("insert into rabbit(created_date) values (?)",
                                  Statement.RETURN_GENERATED_KEYS)) {
-                statement.setTimestamp(1, Timestamp.valueOf(/** не понимаю, какую дату со временем сюда ставить */));
+                statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
                 statement.execute();
-                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        //не понимаю, как сгенеировать ключ без модели данных объекта
-                    }
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
