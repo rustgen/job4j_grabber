@@ -5,9 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 public class HabrCareerDateTimeParser implements DateTimeParser {
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     @Override
     public LocalDateTime parse(String parse) {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(parse, formatter);
+        return LocalDateTime.parse(parse, FORMATTER);
     }
 }
