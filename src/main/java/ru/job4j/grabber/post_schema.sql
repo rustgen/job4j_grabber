@@ -3,5 +3,5 @@ create table post (
     name VARCHAR(100),
     text TEXT,
     link TEXT unique,
-    created SMALLDATETIME
+    created TIMESTAMP
 );
