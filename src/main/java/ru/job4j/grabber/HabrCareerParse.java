@@ -43,11 +43,12 @@ public class HabrCareerParse implements Parse {
         String vacancyName = titleElement.text();
         String dateVacancy = date.child(0).attr("datetime");
         String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
-        String describe = null;
+        String describe;
         try {
             describe = retrieveDescription(link);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new IllegalArgumentException("There is no such Element");
         }
         return new Post(vacancyName, link, describe, dateTimeParser.parse(dateVacancy));
     }
