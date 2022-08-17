@@ -14,18 +14,26 @@ import java.util.List;
 
 public class HabrCareerParse implements Parse {
     private static final String SOURCE_LINK = "https://career.habr.com";
-    private static final String PAGE_LINK = String.format("%s/vacancies/java_developer", SOURCE_LINK);
-    private final DateTimeParser dateTimeParser;
+    private static final String PAGE_LINK = String.format("%s/vacancies/java_developer?page=", SOURCE_LINK);
     private static final int PAGE_NUM = 5;
+    private final DateTimeParser dateTimeParser;
 
     public HabrCareerParse(DateTimeParser dateTimeParser) {
         this.dateTimeParser = dateTimeParser;
     }
 
-    private static String retrieveDescription(String link) throws IOException {
-        Document document = Jsoup.connect(link).get();
-        Elements description = document.select(".style-ugc");
-        return description.text();
+    private static String retrieveDescription(String link) {
+        Document document;
+        try {
+            document = Jsoup.connect(link).get();
+            Elements description = document.select(".style-ugc");
+            return description.text();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException(String.format(
+                    "There is no connection with such link --- \"%s\"", link
+            ));
+        }
     }
 
     private Post parsePost(Element row) {
@@ -38,7 +46,7 @@ public class HabrCareerParse implements Parse {
         String describe = null;
         try {
             describe = retrieveDescription(link);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new Post(vacancyName, link, describe, dateTimeParser.parse(dateVacancy));
@@ -48,8 +56,7 @@ public class HabrCareerParse implements Parse {
     public List<Post> list(String linkIn) {
         List<Post> list = new ArrayList<>();
         for (int i = 1; i <= PAGE_NUM; i++) {
-            final String PAGE_NUM_LINK = String.format("%s?page=%d", linkIn, i);
-            Connection connection = Jsoup.connect(PAGE_NUM_LINK);
+            Connection connection = Jsoup.connect(linkIn + i);
             Document document;
             try {
                 document = connection.get();
