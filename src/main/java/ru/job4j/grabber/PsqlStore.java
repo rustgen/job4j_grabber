@@ -14,7 +14,7 @@ public class PsqlStore implements Store, AutoCloseable {
 
     public PsqlStore(Properties cfg) {
         try {
-            Class.forName(cfg.getProperty("jdbc.driver"));
+            Class.forName(cfg.getProperty("driver-class-name"));
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -113,8 +113,8 @@ public class PsqlStore implements Store, AutoCloseable {
             store.save(new Post("google", "https://www.google.com/",
                     "Web searcher", LocalDateTime.now()));
             store.save(new Post("duckduckgo", "https://duckduckgo.com/",
-                    "Web searcher", LocalDateTime.now()));
-            System.out.println(store.findById(2));
+                    "Web searcher without tracking", LocalDateTime.now()));
+            System.out.println(store.findById(3));
             store.getAll().forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
