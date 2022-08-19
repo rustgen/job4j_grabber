@@ -29,9 +29,12 @@ public class Grabber implements Grab {
         return scheduler;
     }
 
-    public void cfg() throws IOException {
+    public void cfg() {
         try (InputStream in = Grabber.class.getClassLoader().getResourceAsStream("post.properties")) {
             cfg.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("There is an issue with configuration load!");
         }
     }
 
@@ -61,7 +64,7 @@ public class Grabber implements Grab {
             Store store = (Store) map.get("store");
             Parse parse = (Parse) map.get("parse");
             List<Post> list = parse.list(PAGE_LINK);
-            list.forEach(post -> store.save(post));
+            list.forEach(store::save);
         }
     }
 
