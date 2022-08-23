@@ -182,14 +182,12 @@ insert into person (id, name, company_id) values (149, 'Zackariah', 11);
 insert into person (id, name, company_id) values (150, 'Michaella', 14);
 
 -- 1. имена всех person, которые не состоят в компании с id = 5
-select name from person
-where company_id != 5;
-
--- 1. название компании для каждого человека
+-- название компании для каждого человека
 SELECT person.name AS person_name,
 company.name AS company
 FROM person INNER JOIN Company
-ON person.company_id = company.id;
+ON person.company_id = company.id
+WHERE company_id != 5;
 
 -- 2. Необходимо выбрать название компании с максимальным количеством человек + количество человек в этой компании
 -- нужно учесть, что таких компаний может быть несколько, и вывести надо информацию о каждой компании
