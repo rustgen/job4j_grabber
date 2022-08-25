@@ -191,8 +191,23 @@ WHERE company_id != 5;
 
 -- 2. Необходимо выбрать название компании с максимальным количеством человек + количество человек в этой компании
 -- нужно учесть, что таких компаний может быть несколько, и вывести надо информацию о каждой компании
-SELECT c.name company, COUNT(p.company_id) num_persons
+--SELECT c.name company, COUNT(p.company_id) num
+--FROM person p
+--JOIN company c ON p.company_id = c.id
+--GROUP BY c.name
+--ORDER BY num DESC
+--   same
+--select c.*, (
+--select COUNT(p.company_id) from person p
+--   where p.company_id = c.id
+--) from company c
+
+SELECT c.name company, COUNT(p.company_id) num
 FROM person p
 JOIN company c ON p.company_id = c.id
-GROUP BY c.name
-ORDER BY num_persons DESC;
+where num = (select max(
+select * from person p
+group by id
+order by company_id desc
+limit 1)
+)
