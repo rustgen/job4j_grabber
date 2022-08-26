@@ -205,9 +205,10 @@ WHERE company_id != 5;
 SELECT c.name company, COUNT(p.company_id) num
 FROM person p
 JOIN company c ON p.company_id = c.id
-where num = (select max(
-select * from person p
-group by id
-order by company_id desc
-limit 1)
+GROUP BY c.name
+HAVING COUNT(p.company_id) = (
+    SELECT COUNT(*) FROM person p
+    GROUP BY company_id
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
 )
