@@ -8,13 +8,12 @@ public class MaxMin {
     public <T> T maxMin(List<T> value, Comparator<T> comparator) {
         T res;
         if (value.isEmpty()) {
-            res = null;
-        } else {
-            res = value.get(0);
-            for (T t : value) {
-                if (comparator.compare(t, res) > 0) {
-                    res = t;
-                }
+            return null;
+        }
+        res = value.get(0);
+        for (T t : value) {
+            if (comparator.compare(t, res) > 0) {
+                res = t;
             }
         }
         return res;

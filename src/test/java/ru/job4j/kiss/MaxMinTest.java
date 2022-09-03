@@ -3,6 +3,7 @@ package ru.job4j.kiss;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -30,6 +31,6 @@ public class MaxMinTest {
 
     @Test
     public void whenListIsEmptyThenResultIsNull() {
-        Assert.assertNull(maxMin.min(List.of(null), comparator));
+        Assert.assertNull(maxMin.min(new ArrayList<>(), comparator));
     }
 }
