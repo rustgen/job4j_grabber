@@ -21,8 +21,6 @@ public class GeneratorTest {
                 "subject", "you");
         String expected = "I am a Petr, Who are you? ";
         String result = generator.produce(TEMPLATE, args);
-//        Assert.assertThat(result, is (expected));
-//        Assert.assertEquals(expected, result);
         assertThat(result).isEqualTo(expected);
     }
 
