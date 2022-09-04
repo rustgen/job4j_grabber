@@ -12,4 +12,22 @@ public class Time implements Printer {
     public void printInfo(String msg) {
         System.out.println(TIME.format(DateTimeFormatter.ofPattern(msg)));
     }
+
+    public class TemperatureTime {
+
+        private static final LocalDateTime TIME = LocalDateTime.now();
+        private String temperature;
+        private static String temp = "fahrenheits";
+
+        public TemperatureTime() {
+        }
+
+        public TemperatureTime(String temperature) {
+            this.temperature = temperature;
+        }
+
+        public void print(TemperatureTime tempT) {
+            System.out.println(tempT + temp + TIME);
+        }
+    }
 }

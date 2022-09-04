@@ -6,8 +6,15 @@ public class Temperature implements Saver {
 
     @Override
     public String save(String degree) {
-        String temperature;
-        temperature = degree + " " + temp;
-        return temperature;
+        return degree + " " + temp;
+    }
+
+    public void log() {
+        System.out.println("Temperature monitoring was 3 days a day");
+    }
+
+    public void print() {
+        String degreeMorning = "97";
+        System.out.println(save(degreeMorning));
     }
 }
