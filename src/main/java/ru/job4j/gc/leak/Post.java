@@ -1,6 +1,7 @@
 package ru.job4j.gc.leak;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Post {
 
@@ -43,6 +44,27 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Post post = (Post) o;
+        return Objects.equals(id, post.id)
+                && Objects.equals(text, post.text)
+                && Objects.equals(comments, post.comments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + id.hashCode() + text.hashCode() + comments.hashCode();
+        return result;
     }
 
     @Override
