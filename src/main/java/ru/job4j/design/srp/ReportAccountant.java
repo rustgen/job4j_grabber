@@ -7,8 +7,8 @@ public class ReportAccountant implements Report {
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd:MM:yyyy HH:mm");
 
-    private static final double EXCHANGE_RATE = 60.25;
-    private static final String CURRENCY = "USD";
+    public static final double EXCHANGE_RATE = 60.25;
+    public static final String CURRENCY = "USD";
 
     private Store store;
 

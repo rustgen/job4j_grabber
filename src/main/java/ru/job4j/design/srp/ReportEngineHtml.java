@@ -5,11 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class ReportEngineHtml implements Report, Writer {
+public class ReportEngineHtml implements Report {
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd:MM:yyyy HH:mm");
-
-    private static final String FILE = "report.html";
 
     private Store store;
 
@@ -20,30 +18,32 @@ public class ReportEngineHtml implements Report, Writer {
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
-        text.append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator());
-        List<Employee> employees = store.findBy(filter);
-        for (Employee employee : employees) {
-            text.append(employee.getName()).append(";")
-                    .append(DATE_FORMAT.format(employee.getHired().getTime())).append(";")
-                    .append(DATE_FORMAT.format(employee.getFired().getTime())).append(";")
-                    .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+        text.append("<!DOCTYPE HTML>")
+                .append(System.lineSeparator())
+                .append("<html>").append(System.lineSeparator())
+                .append("<head>").append(System.lineSeparator())
+                .append("<meta http-equiv=\"content-Type\" content=\"text/html; charset=utf-8\">")
+                .append(System.lineSeparator())
+                .append("<title>Table</title>")
+                .append(System.lineSeparator())
+                .append("</head>").append(System.lineSeparator())
+                .append("<body>").append(System.lineSeparator())
+                .append("<table>").append(System.lineSeparator())
+                .append("<tr>").append(System.lineSeparator())
+                .append("<th>Name</th><th>Hired</th><th>Fired</th><th>salary</th>")
+                .append(System.lineSeparator())
+                .append("</tr>").append(System.lineSeparator());
+        for (Employee employee : store.findBy(filter)) {
+            text.append("<tr>").append(System.lineSeparator())
+                    .append("<td>").append(employee.getName()).append("</td>")
+                    .append("<td>").append(DATE_FORMAT.format(employee.getHired().getTime())).append("</td>")
+                    .append("<td>").append(DATE_FORMAT.format(employee.getFired().getTime())).append("</td>")
+                    .append("<td>").append(employee.getSalary()).append("</td>")
+                    .append("</tr>").append(System.lineSeparator());
         }
-        write(employees);
+        text.append("‹/table>").append(System.lineSeparator())
+                .append("</body>").append(System.lineSeparator())
+                .append("</html>").append(System.lineSeparator());
         return text.toString();
-    }
-
-    @Override
-    public void write(List<Employee> list) {
-        try (PrintWriter out = new PrintWriter(
-                new BufferedOutputStream(
-                        new FileOutputStream(FILE)))) {
-            for (Employee e : list) {
-                out.write(e.toString());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
