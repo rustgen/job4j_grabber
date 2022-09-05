@@ -7,7 +7,7 @@ public class PostStore {
 
     private final Map<Integer, Post> posts = new HashMap<>();
 
-    private Integer atomicInteger = 1;
+    private int atomicInteger = 1;
 
     public Post add(Post post) {
         Integer id = atomicInteger++;

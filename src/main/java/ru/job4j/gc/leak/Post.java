@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Post {
 
-    private Integer id;
+    private int id;
 
     private String text;
 
@@ -62,8 +62,8 @@ public class Post {
 
     @Override
     public int hashCode() {
-        Integer result = 17;
-        result = 31 * result + id.hashCode() + text.hashCode() + comments.hashCode();
+        int result = 17;
+        result = 31 * result + text.hashCode() + comments.hashCode();
         return result;
     }
 }

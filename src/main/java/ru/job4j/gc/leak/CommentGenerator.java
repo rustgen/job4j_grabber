@@ -12,15 +12,15 @@ public class CommentGenerator implements Generate {
 
     public static final String SEPARATOR = System.lineSeparator();
 
-    private final List<Comment> comments = new ArrayList<>();
-
     public static final Integer COUNT = 50;
 
-    private List<String> phrases;
+    private final List<Comment> comments = new ArrayList<>();
 
     private final UserGenerator userGenerator;
 
     private final Random random;
+
+    private List<String> phrases;
 
     public CommentGenerator(Random random, UserGenerator userGenerator) {
         this.userGenerator = userGenerator;
