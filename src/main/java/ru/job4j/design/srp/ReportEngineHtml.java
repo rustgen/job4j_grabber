@@ -41,7 +41,7 @@ public class ReportEngineHtml implements Report {
                     .append("<td>").append(employee.getSalary()).append("</td>")
                     .append("</tr>").append(System.lineSeparator());
         }
-        text.append("‹/table>").append(System.lineSeparator())
+        text.append("</table>").append(System.lineSeparator())
                 .append("</body>").append(System.lineSeparator())
                 .append("</html>").append(System.lineSeparator());
         return text.toString();

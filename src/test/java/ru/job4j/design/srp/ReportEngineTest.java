@@ -93,7 +93,7 @@ public class ReportEngineTest {
                 .append("<td>").append(DATE_FORMAT.format(sally.getFired().getTime())).append("</td>")
                 .append("<td>").append(sally.getSalary()).append("</td>")
                 .append("</tr>").append(System.lineSeparator())
-                .append("‹/table>").append(System.lineSeparator())
+                .append("</table>").append(System.lineSeparator())
                 .append("</body>").append(System.lineSeparator())
                 .append("</html>").append(System.lineSeparator());
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
