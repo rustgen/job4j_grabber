@@ -43,9 +43,6 @@ public class GarbMainMenu {
         InsertSort insert = new InsertSort();
         BubbleSort bubble = new BubbleSort();
 
-        merge.sort(randomArray);
-        insert.sort(randomArray);
-        bubble.sort(randomArray);
         while (run) {
             System.out.println(MENU);
             System.out.println(SELECT);
@@ -56,13 +53,13 @@ public class GarbMainMenu {
                 randomArray.insert(250000);
                 System.out.println(SORT);
             } else if (BUBBLE_SORT == userChoice) {
-                new BubbleSort().sort(randomArray);
+                bubble.sort(randomArray);
                 System.out.println(TEXT_OF_BUBBLE);
             } else if (INSERT_SORT == userChoice) {
-                new InsertSort().sort(randomArray);
+                insert.sort(randomArray);
                 System.out.println(TEXT_OF_INSERT);
             } else if (MERGE_SORT == userChoice) {
-                new MergeSort().sort(randomArray);
+                merge.sort(randomArray);
                 System.out.println(TEXT_OF_MERGE);
             } else if (EXIT_PROGRAM == userChoice) {
                 run = false;
