@@ -38,6 +38,14 @@ public class GarbMainMenu {
 
     private static void start(RandomArray randomArray, Scanner scanner) {
         boolean run = true;
+        randomArray.insert(250000);
+        MergeSort merge = new MergeSort();
+        InsertSort insert = new InsertSort();
+        BubbleSort bubble = new BubbleSort();
+
+        merge.sort(randomArray);
+        insert.sort(randomArray);
+        bubble.sort(randomArray);
         while (run) {
             System.out.println(MENU);
             System.out.println(SELECT);

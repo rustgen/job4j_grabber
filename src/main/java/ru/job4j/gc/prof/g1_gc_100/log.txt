@@ -1,2 +1,0 @@
-[0.004s][info][gc] Using G1
-[20.804s][info][gc] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 26M->5M(504M) 12.702ms
