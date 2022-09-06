@@ -119,4 +119,15 @@ public class ReportEngineTest {
                 .append("}]");
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
+
+    @Test
+    public void whenReportToXml() {
+        store.add(henry);
+        ReportXml engine = new ReportXml(store);
+        StringBuilder expect = new StringBuilder()
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .append("<employees/>")
+                .append("");
+        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+    }
 }
