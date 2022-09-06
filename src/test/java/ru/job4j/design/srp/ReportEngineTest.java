@@ -4,6 +4,7 @@ package ru.job4j.design.srp;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static org.assertj.core.api.Assertions.*;
 import static ru.job4j.design.srp.ReportEngine.DATE_FORMAT;
@@ -16,6 +17,9 @@ public class ReportEngineTest {
     private static Employee adam = new Employee("Adam", now, now, 120);
     private static Employee kevin = new Employee("Kevin", now, now, 160);
     private static Employee sally = new Employee("Sally", now, now, 140);
+    private static Employee henry = new Employee(
+            "Henry", new GregorianCalendar(2021, Calendar.DECEMBER, 23),
+            new GregorianCalendar(2022, Calendar.FEBRUARY, 13), 140);
 
     @Test
     public void whenOldGenerated() {
@@ -69,7 +73,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenReportInHtml() {
+    public void whenReporttoHtml() {
         store.add(sally);
         Report engine = new ReportEngineHtml(store);
         StringBuilder expect = new StringBuilder()
@@ -97,6 +101,33 @@ public class ReportEngineTest {
                 .append("</table>").append(System.lineSeparator())
                 .append("</body>").append(System.lineSeparator())
                 .append("</html>").append(System.lineSeparator());
+        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+    }
+
+    @Test
+    public void whenReportToJson() {
+        store.add(henry);
+        ReportJson engine = new ReportJson(store);
+        StringBuilder expect = new StringBuilder()
+                .append("[{")
+                .append("\"name\":\"Henry\",")
+                .append("\"hired\":{\"year\":2021,\"month\":11,\"dayOfMonth\":23,"
+                        + "\"hourOfDay\":0,\"minute\":0,\"second\":0},")
+                .append("\"fired\":{\"year\":2022,\"month\":1,\"dayOfMonth\":13,"
+                        + "\"hourOfDay\":0,\"minute\":0,\"second\":0},")
+                .append("\"salary\":140.0")
+                .append("}]");
+        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+    }
+
+    @Test
+    public void whenReportToXml() {
+        store.add(henry);
+        ReportXml engine = new ReportXml(store);
+        StringBuilder expect = new StringBuilder()
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .append("<employees/>")
+                .append("");
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
 }
