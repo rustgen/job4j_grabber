@@ -6,6 +6,12 @@ public abstract class Car {
     private String color;
     private int maxSpeed;
 
+    public Car(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public abstract String speed(String miles);
+
     public abstract void gas();
 
     public abstract void brake();
