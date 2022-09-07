@@ -3,6 +3,8 @@ package ru.job4j.design.srp;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.StringJoiner;
@@ -12,13 +14,13 @@ import static ru.job4j.design.srp.ReportEngine.DATE_FORMAT;
 
 public class ReportEngineTest {
 
-    private static MemStore store = new MemStore();
-    private static Calendar now = Calendar.getInstance();
-    private static Employee john = new Employee("John", now, now, 150);
-    private static Employee adam = new Employee("Adam", now, now, 120);
-    private static Employee kevin = new Employee("Kevin", now, now, 160);
-    private static Employee sally = new Employee("Sally", now, now, 140);
-    private static Employee henry = new Employee(
+    private MemStore store = new MemStore();
+    private Calendar now = Calendar.getInstance();
+    private Employee john = new Employee("John", now, now, 150);
+    private Employee adam = new Employee("Adam", now, now, 120);
+    private Employee kevin = new Employee("Kevin", now, now, 160);
+    private Employee sally = new Employee("Sally", now, now, 140);
+    private Employee henry = new Employee(
             "Henry", new GregorianCalendar(2021, Calendar.DECEMBER, 23),
             new GregorianCalendar(2022, Calendar.FEBRUARY, 13), 140);
 
@@ -123,14 +125,22 @@ public class ReportEngineTest {
 
     @Test
     public void whenReportToXml() {
-        store.add(henry);
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        String date = formatter.format(now.getTime());
+        store.add(sally);
         Report engine = new ReportXml(store);
-        StringBuilder expect = new StringBuilder()
-                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
-                .append(System.lineSeparator())
-                .append("<employees/>")
-                .append(System.lineSeparator())
-                .append("");
-        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+        String result = engine.generate(employee -> true);
+
+        StringJoiner expected = new StringJoiner("\n")
+                .add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .add("<report>")
+                .add("      <employees>")
+                .add(String.format("    <fired>%s</fired>", date))
+                .add(String.format("    <hired>%s</hired>", date))
+                .add("          <name>Sally</name>")
+                .add("          <salary>140.0</salary>")
+                .add("      </employees>")
+                .add("</report>\n");
+        assertThat(result).isEqualTo(expected.toString());
     }
 }

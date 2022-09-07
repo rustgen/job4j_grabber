@@ -3,6 +3,7 @@ package ru.job4j.design.srp;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class ReportXml implements Report {
     @XmlRootElement(name = "employees")
     public static class Employees {
 
+        @XmlElement(name = "employee")
         private List<Employee> employees;
 
         public Employees() {

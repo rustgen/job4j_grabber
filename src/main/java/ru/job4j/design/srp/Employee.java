@@ -1,8 +1,14 @@
 package ru.job4j.design.srp;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.util.Calendar;
 import java.util.Objects;
 
+@XmlRootElement(name = "employees")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
 
     private String name;
