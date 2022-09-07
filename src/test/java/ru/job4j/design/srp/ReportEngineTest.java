@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.StringJoiner;
 
 import static org.assertj.core.api.Assertions.*;
 import static ru.job4j.design.srp.ReportEngine.DATE_FORMAT;
@@ -73,7 +74,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenReporttoHtml() {
+    public void whenReportToHtml() {
         store.add(sally);
         Report engine = new ReportEngineHtml(store);
         StringBuilder expect = new StringBuilder()
@@ -108,25 +109,27 @@ public class ReportEngineTest {
     public void whenReportToJson() {
         store.add(henry);
         ReportJson engine = new ReportJson(store);
-        StringBuilder expect = new StringBuilder()
-                .append("[{")
-                .append("\"name\":\"Henry\",")
-                .append("\"hired\":{\"year\":2021,\"month\":11,\"dayOfMonth\":23,"
+        String result = engine.generate(employee -> true);
+        StringJoiner expect = new StringJoiner("")
+                .add("[{\"name\":\"Henry\",")
+                .add("\"hired\":{\"year\":2021,\"month\":11,\"dayOfMonth\":23,"
                         + "\"hourOfDay\":0,\"minute\":0,\"second\":0},")
-                .append("\"fired\":{\"year\":2022,\"month\":1,\"dayOfMonth\":13,"
+                .add("\"fired\":{\"year\":2022,\"month\":1,\"dayOfMonth\":13,"
                         + "\"hourOfDay\":0,\"minute\":0,\"second\":0},")
-                .append("\"salary\":140.0")
-                .append("}]");
-        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
+                .add("\"salary\":140.0")
+                .add("}]");
+        assertThat(result).isEqualTo(expect.toString());
     }
 
     @Test
     public void whenReportToXml() {
         store.add(henry);
-        ReportXml engine = new ReportXml(store);
+        Report engine = new ReportXml(store);
         StringBuilder expect = new StringBuilder()
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+                .append(System.lineSeparator())
                 .append("<employees/>")
+                .append(System.lineSeparator())
                 .append("");
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
