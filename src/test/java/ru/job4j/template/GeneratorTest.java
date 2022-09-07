@@ -29,7 +29,6 @@ public class GeneratorTest {
         Generator generator = new UsersGenerator();
         Map<String, String> args = Map.of("name", "Petr",
                 "kind", "human");
-        String result = generator.produce(TEMPLATE, args);
         Assert.assertThrows(IllegalArgumentException.class, () -> {
             generator.produce(TEMPLATE, args);
         });
@@ -40,7 +39,6 @@ public class GeneratorTest {
         Generator generator = new UsersGenerator();
         Map<String, String> args = Map.of("name", "Petr",
                 "kind", "human", "subject", "you", "sex", "male");
-        String result = generator.produce(TEMPLATE, args);
         Assert.assertThrows(IllegalArgumentException.class, () -> {
             generator.produce(TEMPLATE, args);
         });
