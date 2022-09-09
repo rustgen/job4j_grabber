@@ -1,34 +1,11 @@
 package ru.job4j.ood.lsp;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Bread extends Food {
-    public Bread(String name, Calendar expireDate, Calendar createDate, double price, int discount) {
+
+    public Bread(String name, LocalDate expireDate, LocalDate createDate, double price, int discount) {
         super(name, expireDate, createDate, price, discount);
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public Calendar getExpireDate() {
-        return super.getExpireDate();
-    }
-
-    @Override
-    public Calendar getCreateDate() {
-        return super.getCreateDate();
-    }
-
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    @Override
-    public int getDiscount() {
-        return super.getDiscount();
     }
 }
