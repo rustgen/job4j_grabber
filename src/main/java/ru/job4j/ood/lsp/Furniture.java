@@ -6,6 +6,7 @@ public class Furniture {
     protected String withoutSalePercent = "0";
 
     public Furniture(String model) {
+        checkModel(model);
         this.model = model;
     }
 
