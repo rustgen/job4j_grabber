@@ -134,12 +134,12 @@ public class ReportEngineTest {
         StringJoiner expected = new StringJoiner("\n")
                 .add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
                 .add("<report>")
-                .add("      <employees>")
-                .add(String.format("    <fired>%s</fired>", date))
-                .add(String.format("    <hired>%s</hired>", date))
-                .add("          <name>Sally</name>")
-                .add("          <salary>140.0</salary>")
-                .add("      </employees>")
+                .add("    <employee>")
+                .add(String.format("        <fired>%s</fired>", date))
+                .add(String.format("        <hired>%s</hired>", date))
+                .add("        <name>Sally</name>")
+                .add("        <salary>140.0</salary>")
+                .add("    </employee>")
                 .add("</report>\n");
         assertThat(result).isEqualTo(expected.toString());
     }

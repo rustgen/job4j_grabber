@@ -3,6 +3,8 @@ package ru.job4j.design.srp;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -39,7 +41,8 @@ public class ReportXml implements Report {
         return xml;
     }
 
-    @XmlRootElement(name = "employees")
+    @XmlRootElement(name = "report")
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Employees {
 
         @XmlElement(name = "employee")
