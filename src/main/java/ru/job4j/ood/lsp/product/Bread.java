@@ -1,7 +1,6 @@
-package ru.job4j.ood.lsp;
+package ru.job4j.ood.lsp.product;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class Bread extends Food {
 

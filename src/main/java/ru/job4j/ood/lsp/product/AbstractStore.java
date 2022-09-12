@@ -1,13 +1,15 @@
-package ru.job4j.ood.lsp;
+package ru.job4j.ood.lsp.product;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Warehouse implements Store {
+import static java.time.temporal.ChronoUnit.DAYS;
+
+public abstract class AbstractStore {
 
     private List<Food> grocery = new ArrayList<>();
 
-    @Override
     public boolean add(Food food) {
         boolean accept = accept(food);
         if (accept) {
@@ -16,23 +18,19 @@ public class Warehouse implements Store {
         return accept;
     }
 
-    @Override
-    public boolean accept(Food food) {
-        return getPercentLifeExpired(food) < 25;
-    }
-
-    @Override
     public Food get(int index) {
         return grocery.get(index);
     }
 
-    @Override
     public List<Food> getAll() {
-        return grocery;
+        return new ArrayList<>(grocery);
     }
 
-    @Override
+    abstract boolean accept(Food food);
+
     public double getPercentLifeExpired(Food food) {
-        return Store.super.getPercentLifeExpired(food);
+        double total = food.getCreateDate().until(food.getExpireDate(), DAYS);
+        double current = food.getCreateDate().until(LocalDate.now(), DAYS);
+        return (current / total) * 100;
     }
 }
