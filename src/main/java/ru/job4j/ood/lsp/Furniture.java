@@ -20,9 +20,6 @@ public class Furniture {
     }
 
     public void type(String season) {
-        if (model == null) {
-            throw new IllegalArgumentException("Need model in any case");
-        }
         System.out.println(season);
     }
 

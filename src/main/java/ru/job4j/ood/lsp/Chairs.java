@@ -8,7 +8,7 @@ public class Chairs extends Furniture {
 
     @Override
     public void setModel(String model) {
-        super.setModel(model);
+        this.model = model;
     }
 
     public void type(String season) {
