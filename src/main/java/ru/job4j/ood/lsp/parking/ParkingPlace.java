@@ -14,17 +14,17 @@ public class ParkingPlace implements Parking {
     @Override
     public boolean addVehicle(Vehicle vehicle) {
         boolean result = false;
-        int vehSize = vehicle.sizeSlot();
+        int vehSize = vehicle.getSize();
         if (vehSize > 1 && trucks.size() >= truckSpot && cars.size() > truckSpot) {
             cars.add(vehicle);
-            carSpot -= vehicle.sizeSlot();
+            carSpot -= vehicle.getSize();
             result = true;
         }
-        if (vehicle.sizeSlot() > 1 && trucks.size() < truckSpot) {
+        if (vehicle.getSize() > 1 && trucks.size() < truckSpot) {
             trucks.add(vehicle);
             truckSpot--;
             result = true;
-        } else if (vehicle.sizeSlot() == 1 && cars.size() < carSpot) {
+        } else if (vehicle.getSize() == 1 && cars.size() < carSpot) {
             cars.add(vehicle);
             carSpot--;
             result = true;

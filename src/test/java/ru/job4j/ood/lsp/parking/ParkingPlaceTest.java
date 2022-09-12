@@ -23,7 +23,7 @@ public class ParkingPlaceTest {
     @Test
     public void whenParkTruck() {
         Parking parking = new ParkingPlace();
-        Vehicle truck = new Truck();
+        Vehicle truck = new Truck(3);
         parking.addVehicle(truck);
         assertThat(parking.getTrucks(), is(List.of(truck)));
     }

@@ -2,14 +2,14 @@ package ru.job4j.ood.lsp.parking;
 
 public class Truck implements Vehicle {
 
-    private static int size;
+    public final int size;
 
-    public static int getSize() {
-        return size;
+    public Truck(int size) {
+        this.size = size;
     }
 
     @Override
-    public int sizeSlot() {
-        return 0;
+    public int getSize() {
+        return size;
     }
 }
