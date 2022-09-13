@@ -10,10 +10,6 @@ public abstract class AbstractStore {
 
     private List<Food> grocery = new ArrayList<>();
 
-    public List<Food> getGrocery() {
-        return new ArrayList<>(grocery);
-    }
-
     public boolean add(Food food) {
         boolean accept = accept(food);
         if (accept) {

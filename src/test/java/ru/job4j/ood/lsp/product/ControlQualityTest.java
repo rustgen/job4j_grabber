@@ -66,5 +66,6 @@ public class ControlQualityTest {
         assertEquals(trash.getAll(), List.of(tuna));
         assertEquals(shop.getAll(), List.of(salmon, glutenFreeBread));
         assertEquals(warehouse.getAll(), List.of(appleJuice));
+        assertThat(shop.get(1), is(glutenFreeBread));
     }
 }
