@@ -10,6 +10,10 @@ public abstract class AbstractStore {
 
     private List<Food> grocery = new ArrayList<>();
 
+    public List<Food> getGrocery() {
+        return grocery;
+    }
+
     public boolean add(Food food) {
         boolean accept = accept(food);
         if (accept) {
@@ -32,5 +36,9 @@ public abstract class AbstractStore {
         double total = food.getCreateDate().until(food.getExpireDate(), DAYS);
         double current = food.getCreateDate().until(LocalDate.now(), DAYS);
         return (current / total) * 100;
+    }
+
+    public void clearStore() {
+        grocery.clear();
     }
 }
