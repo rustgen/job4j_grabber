@@ -44,6 +44,6 @@ public class ParkingPlace implements Parking {
 
     @Override
     public List<Vehicle> getTrucks() {
-        return new ArrayList<>(cars);
+        return new ArrayList<>(trucks);
     }
 }
