@@ -5,11 +5,16 @@ import java.util.List;
 
 public class ParkingPlace implements Parking {
 
-    private static int carSpot;
-    private static int truckSpot;
+    private int carSpot;
+    private int truckSpot;
 
-    List<Vehicle> cars = new ArrayList<>(carSpot);
-    List<Vehicle> trucks = new ArrayList<>(truckSpot);
+    private List<Vehicle> cars = new ArrayList<>(carSpot);
+    private List<Vehicle> trucks = new ArrayList<>(truckSpot);
+
+    public ParkingPlace(int carSpot, int truckSpot) {
+        this.carSpot = carSpot;
+        this.truckSpot = truckSpot;
+    }
 
     @Override
     public boolean addVehicle(Vehicle vehicle) {
@@ -34,11 +39,11 @@ public class ParkingPlace implements Parking {
 
     @Override
     public List<Vehicle> getCars() {
-        return cars;
+        return new ArrayList<>(cars);
     }
 
     @Override
     public List<Vehicle> getTrucks() {
-        return trucks;
+        return new ArrayList<>(cars);
     }
 }
