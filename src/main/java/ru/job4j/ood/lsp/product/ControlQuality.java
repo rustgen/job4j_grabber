@@ -12,7 +12,7 @@ public class ControlQuality {
     }
 
     public List<AbstractStore> getStores() {
-        return stores;
+        return new ArrayList<>(stores);
     }
 
     public void distribute(Food food) {

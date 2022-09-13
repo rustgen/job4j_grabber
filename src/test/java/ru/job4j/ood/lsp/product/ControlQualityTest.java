@@ -53,4 +53,18 @@ public class ControlQualityTest {
         trash.add(tuna);
         assertEquals(trash.getAll(), List.of(tuna));
     }
+
+    @Test
+    public void whenAddDifferentProducts() {
+        AbstractStore shop = new Shop();
+        AbstractStore warehouse = new Warehouse();
+        AbstractStore trash = new Trash();
+        shop.add(salmon);
+        shop.add(glutenFreeBread);
+        warehouse.add(appleJuice);
+        trash.add(tuna);
+        assertEquals(trash.getAll(), List.of(tuna));
+        assertEquals(shop.getAll(), List.of(salmon, glutenFreeBread));
+        assertEquals(warehouse.getAll(), List.of(appleJuice));
+    }
 }

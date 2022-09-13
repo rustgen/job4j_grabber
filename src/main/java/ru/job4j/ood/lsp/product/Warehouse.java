@@ -4,6 +4,6 @@ public class Warehouse extends AbstractStore {
 
     @Override
     boolean accept(Food food) {
-        return getPercentLifeExpired(food) < 25;
+        return getPercentLifeExpired(food) < PhysicalConstants.GOODQUAL;
     }
 }

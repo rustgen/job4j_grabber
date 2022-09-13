@@ -5,16 +5,15 @@ import java.util.List;
 
 public class Shop extends AbstractStore {
 
-    private List<Food> grocery = new ArrayList<>();
-
     @Override
     boolean accept(Food food) {
-        if (getPercentLifeExpired(food) > 75 && getPercentLifeExpired(food) < 100) {
+        if (getPercentLifeExpired(food) > PhysicalConstants.MEDIUMQUAL
+                && getPercentLifeExpired(food) < PhysicalConstants.BADQUAL) {
             food.setPrice(
                     food.getPrice() - food.getDiscount()
             );
-            return grocery.add(food);
         }
-        return getPercentLifeExpired(food) >= 25 && getPercentLifeExpired(food) <= 75;
+        return getPercentLifeExpired(food) >= PhysicalConstants.GOODQUAL
+                && getPercentLifeExpired(food) < PhysicalConstants.BADQUAL;
     }
 }

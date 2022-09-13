@@ -4,6 +4,6 @@ public class Trash extends AbstractStore {
 
     @Override
     boolean accept(Food food) {
-        return getPercentLifeExpired(food) >= 100;
+        return getPercentLifeExpired(food) >= PhysicalConstants.BADQUAL;
     }
 }
