@@ -20,16 +20,16 @@ public class ParkingPlace implements Parking {
     public boolean addVehicle(Vehicle vehicle) {
         boolean result = false;
         int vehSize = vehicle.getSize();
-        if (vehSize > 1 && trucks.size() >= truckSpot && cars.size() > truckSpot) {
+        if (vehSize > 1 && trucks.size() > truckSpot && vehSize <= carSpot) {
             cars.add(vehicle);
             carSpot -= vehicle.getSize();
             result = true;
         }
-        if (vehicle.getSize() > 1 && trucks.size() < truckSpot) {
+        if (vehicle.getSize() > 1 && trucks.size() <= truckSpot) {
             trucks.add(vehicle);
             truckSpot--;
             result = true;
-        } else if (vehicle.getSize() == 1 && cars.size() < carSpot) {
+        } else if (vehicle.getSize() == 1 && cars.size() <= carSpot) {
             cars.add(vehicle);
             carSpot--;
             result = true;
