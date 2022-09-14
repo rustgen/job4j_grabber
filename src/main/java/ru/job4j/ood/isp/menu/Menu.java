@@ -1,6 +1,5 @@
 package ru.job4j.ood.isp.menu;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -8,7 +7,8 @@ import java.util.stream.Collectors;
 
 public interface Menu extends Iterable<Menu.MenuItemInfo> {
 
-    String ROOT = null; /* Константа, указывающая, что нужно добавить элемент в корень */
+    /* A constant indicating that the element should be added to the root */
+    String ROOT = null;
 
     boolean add(String parentName, String childName, ActionDelegate actionDelegate);
 
@@ -68,6 +68,16 @@ public interface Menu extends Iterable<Menu.MenuItemInfo> {
         @Override
         public int hashCode() {
             return Objects.hash(name, children, number);
+        }
+
+        @Override
+        public String toString() {
+            return "MenuItemInfo{"
+                   + "name='" + name + '\''
+                   + ", children=" + children
+                   + ", actionDelegate=" + actionDelegate
+                   + ", number='" + number + '\''
+                   + '}';
         }
     }
 }
