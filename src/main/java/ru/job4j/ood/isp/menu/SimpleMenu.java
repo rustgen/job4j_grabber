@@ -8,18 +8,18 @@ public class SimpleMenu implements Menu {
 
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
-        boolean rsl = false;
         if (findItem(childName).isPresent()) {
-            return rsl;
+            return false;
         }
         if (parentName == null) {
             rootElements.add(new SimpleMenuItem(childName, actionDelegate));
-            rsl = true;
+            return true;
         } else {
-            findItem(parentName).get().menuItem.getChildren().add(new SimpleMenuItem(childName, actionDelegate));
-            rsl = true;
+            findItem(parentName)
+                    .ifPresent(itemInfo -> itemInfo.menuItem.getChildren()
+                            .add(new SimpleMenuItem(childName, actionDelegate)));
+            return true;
         }
-        return rsl;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SimpleMenu implements Menu {
 
     private Optional<ItemInfo> findItem(String name) {
         Optional<ItemInfo> res = Optional.empty();
-        if (name == null) {
+        if (Objects.equals(name, Menu.ROOT)) {
             return res;
         }
         DFSIterator iterator = new DFSIterator();

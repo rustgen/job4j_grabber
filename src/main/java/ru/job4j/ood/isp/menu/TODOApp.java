@@ -1,9 +1,5 @@
 package ru.job4j.ood.isp.menu;
 
-import ru.job4j.ood.isp.menu.ActionDelegate;
-import ru.job4j.ood.isp.menu.Menu;
-import ru.job4j.ood.isp.menu.SimpleMenu;
-
 import java.util.Scanner;
 
 public class TODOApp {
@@ -42,7 +38,7 @@ public class TODOApp {
 
     private void showAllItems() {
         System.out.println("All items:");
-        new MenuPrint().print(menu);
+        new ConsoleMenuPrinter().print(menu);
     }
 
     private void start() {
