@@ -1,6 +1,5 @@
 package ru.job4j.ood.lsp.parking;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
