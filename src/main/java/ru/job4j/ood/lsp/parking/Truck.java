@@ -10,7 +10,7 @@ public class Truck implements Vehicle {
 
     @Override
     public int getSize() {
-        if (size <= 1) {
+        if (size <= Car.SIZE) {
             throw new IllegalArgumentException("Truck size should be more than 1");
         }
         return size;
