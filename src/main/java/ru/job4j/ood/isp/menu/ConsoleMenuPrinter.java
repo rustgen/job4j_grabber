@@ -11,9 +11,9 @@ public class ConsoleMenuPrinter implements MenuPrinter {
     public void print(Menu menu) {
         for (Menu.MenuItemInfo itemInfo : menu) {
             String repeater = String.join(
+                    itemInfo.getNumber(),
                     INDENT.repeat(itemInfo.getNumber().split(SPLITTER).length - 1),
-                    itemInfo.getName(),
-                    itemInfo.getNumber()
+                    itemInfo.getName()
             );
             System.out.println(repeater);
         }

@@ -8,7 +8,7 @@ public class SimpleMenu implements Menu {
 
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
-        if (findItem(childName).isEmpty()) {
+        if (findItem(childName).isPresent()) {
             return false;
         }
         if (Objects.equals(parentName, Menu.ROOT)) {

@@ -1,7 +1,10 @@
 package ru.job4j.ood.isp.menu;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,15 +61,19 @@ class SimpleMenuTest {
         menu.add("Reminders", "Pay for insurance", STUB_ACTION);
         menu.add("Tasks", "Clean home", STUB_ACTION);
         menu.add("Tasks", "Buy products", STUB_ACTION);
-        List<Menu.MenuItemInfo> expected = List.of((new Menu.MenuItemInfo(
-                "Reminders",
-                List.of("Pay the phone", "Pay for insurance"), STUB_ACTION, "1."
-        )), new Menu.MenuItemInfo(
-                "Tasks",
-                List.of("Clean home", "Pay for insurance"), STUB_ACTION, "2."
-        ));
-        menu.forEach(i -> System.out.println(i.getNumber() + i.getName()));
-        List<String> result = new ArrayList<>();
-        menu.forEach(el -> result.add(el.getNumber() + el.getName()));
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream prev = System.out;
+        PrintStream now = new PrintStream(output);
+        System.setOut(now);
+        new ConsoleMenuPrinter().print(menu);
+        System.setOut(prev);
+        String expected = String.join(System.lineSeparator(),
+                "1.Reminders",
+                "---1.1.Pay the phone",
+                "---1.2.Pay for insurance",
+                "2.Tasks",
+                "---2.1.Clean home",
+                "---2.2.Buy products" + System.lineSeparator());
+        Assert.assertEquals(expected, output.toString());
     }
 }
