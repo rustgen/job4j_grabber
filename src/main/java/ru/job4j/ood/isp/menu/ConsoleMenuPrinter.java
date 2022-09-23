@@ -10,9 +10,9 @@ public class ConsoleMenuPrinter implements MenuPrinter {
     @Override
     public void print(Menu menu) {
         for (Menu.MenuItemInfo itemInfo : menu) {
-            String repeater = String.join(
-                    itemInfo.getNumber(),
+            String repeater = String.join("",
                     INDENT.repeat(itemInfo.getNumber().split(SPLITTER).length - 1),
+                    itemInfo.getNumber(),
                     itemInfo.getName()
             );
             System.out.println(repeater);
